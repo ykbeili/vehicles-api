@@ -3,20 +3,10 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-require('dotenv').config()
 
-const MongoClient = require('mongodb').MongoClient
-const connectionString = process.env.MONGO_CLIENT
-MongoClient.connect(connectionString, { useUnifiedTopology: true })
-.then(client => {
-  console.log('Connected to Database123');
-  const db = client.db('vehicles');
-  const vehiclesCollection = db.collection('vehicles');
-})
-.catch(error => console.error(error))
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
-
+var vehiclesRouter = require('./routes/vehicles');
 var app = express();
 
 // view engine setup
@@ -31,7 +21,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
-
+app.use('/vehicles', vehiclesRouter);
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));
