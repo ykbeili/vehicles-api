@@ -13,9 +13,9 @@ router.get('/', function(req, res, next) {
     const vehiclesCollection = db.collection('vehicles');
     vehiclesCollection.find().toArray()
     .then(results => {
-        return results
-      })
-      .catch(error => console.error(error))
+        res.send({ data: results })
+    })
+    .catch(error => console.error(error))
   })
   .catch(error => console.error(error))
 });
