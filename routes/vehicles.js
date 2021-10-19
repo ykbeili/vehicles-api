@@ -54,7 +54,13 @@ router.put('/:id', (req, res) => {
   .then(client => {
     const db = client.db('vehicles');
     const vehiclesCollection = db.collection('vehicles');
-    vehiclesCollection.updateOne({ "_id": ObjectId(req.params.id) }, {$set: { "make": req.body.make, "model": req.body.model }}, function(err, results) {
+    vehiclesCollection.updateOne({ "_id": ObjectId(req.params.id) }, {$set: 
+      { "make": req.body.make, 
+        "model": req.body.model,
+        "year": req.body.year,
+        "status": req.body.status,
+        "price": req.body.price
+    }}, function(err, results) {
       if (err) throw err;
       res.send({ data: results })
     })
